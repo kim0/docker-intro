@@ -4,9 +4,9 @@ Docker Intro
 
 This is an Docker introduction slide deck:
 
-Slides: <http://smancke.github.io/docker-intro>
+Slides: <http://kim0.github.io/docker-intro>
 
-Source <https://github.com/smancke/docker-intro>
+Source <https://github.com/kim0/docker-intro>
 
 Contents:
 ----------
