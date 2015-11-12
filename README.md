@@ -4,7 +4,7 @@ Docker Intro
 
 This is an Docker introduction slide deck:
 
-Slides: <http://kim0.github.io/docker-intro>
+Slides: <http://kim0.github.io/docker-intro/>
 
 Source <https://github.com/kim0/docker-intro>
 
@@ -14,6 +14,26 @@ Contents:
 1. __Command line interface__
 1. __Dockerfiles__
 1. __docker-compose__
+
+Lies, lies everywhere
+======================
+
+Choose your abstraction
+-----------------------
+
+* CPU Hardware
+* ISA
+* Linux Kernel ABI
+* PaaS !
+
+Problem
+=======
+
+What problem does docker solve
+------------------------------
+
+* Containers for "real" shipping
+* Software people "ship" things too!
 
 What is Docker
 ================
