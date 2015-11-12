@@ -2,11 +2,13 @@
 Docker Intro
 ===============
 
-This is an Docker introduction slide deck:
+View, Share, Fork!
 
 Slides: <http://kim0.github.io/docker-intro/>
 
 Source <https://github.com/kim0/docker-intro>
+
+![Twitter](https://g.twimg.com/dev/documentation/image/Twitter_logo_blue_48.png) @ak_kim0
 
 Contents:
 ----------
@@ -18,13 +20,18 @@ Contents:
 Lies, lies everywhere
 ======================
 
-Choose your abstraction
+Lies upon lies?
 -----------------------
 
 * CPU Hardware
-* ISA
+* ISA / Virtualization
 * Linux Kernel ABI
-* PaaS !
+* Cloud
+
+Not really new!
+---------------
+
+![FreeBSD Jails](http://negativo17.org/site/wp-content/uploads/2013/09/freebsd.png)     ![Solaris Zones](http://www.operating-system.org/betriebssystem/gfx/logo/solaris_101-logo.jpg)
 
 Problem
 =======
@@ -35,7 +42,9 @@ What problem does docker solve
 * Containers for "real" shipping
 * Software people "ship" things too!
 
-What is Docker
+![](http://www.pacecargo.com/wp-content/uploads/2014/05/CONTAINERS.4jpg.jpg)
+
+What Docker is
 ================
 
 Key concepts
@@ -45,7 +54,7 @@ Key concepts
 * Sandbox with defined resources
 * One simple interface for launching applications
 
-What is Docker not!
+What Docker is not!
 --------------------
 * Not a virtualisation
 * No seperate kernel
@@ -66,7 +75,7 @@ The docker hello world
 
     docker run busybox echo 'Hello World'
 
-What has happened?
+What just happened?
 
 * Download the image `busybox`
 * Create a new container
@@ -87,12 +96,11 @@ Docker Container
 ---------------
 
 * An instance of an image
-* Should nor be used immutable modified
 * Maintains changes within the filesystems
 * Can be started, stopped, restarted, ..
       
       
-Commands for image handling
+Image handling
 ==============================
 
 search, pull & push
@@ -110,7 +118,7 @@ upload an image to the registry:
 
     docker push <image>
 
-Commands for image handling
+Image handling
 ==============================
 
 list, tag & delete
@@ -148,10 +156,6 @@ My favorite run options:
      -d, --detach=false Run container in background and print container ID
      -i, --interactive=false   Keep STDIN open even if not attached
      -t, --tty=false    Allocate a pseudo-TTY
-
-Exercise:
-----------
-Start an nginx web server with a custom `index.html` file.
 
 See your containers:
 ========================
@@ -196,7 +200,7 @@ Remove containers:
     docker rm <container..>
 
 
-Useful tricks: Container Id
+Tricks: Container Id
 ==============================
 
 give your containers a name
@@ -237,17 +241,6 @@ copy files from and to docker container, e.g.
 
     docker cp my_webserver:/etc/nginx/nginx.conf ~/
 
-Interaction and debugging
-==========================
-
-Exercise
-----------
-1. Start a webserver
-2. Overwrite the content of the index.html
-3. Watch the webserver logs
-4. compare the output of `ps aux` from your container with the host
-
-
 Modify a container
 ===================
 
@@ -265,21 +258,7 @@ Note:
 - Docker uses layered filesystems, so images and containers only need to store the diff to the their base image
 
 
-Modify a container
-==========================
-
-Exercise
-----------
-1. Search online for the docker registry image 
-1. Start a private a docker image registry
-    - Search for the image at <https://hub.docker.com/>
-    - Start the image local
-1. Commit your containers changes from the previous exercise
-1. Push your new image to your private registry
-1. Delete the image local
-1. Start the image again (now comming from the registry)
-
-Useful tricks: Cleanup Script
+Tricks: Cleanup Script
 =======================================
 You have to cleanup your local images and old containers regulary.
 
@@ -320,7 +299,7 @@ Note:
 ---------------------
 - The build has the current directory as context
 - All paths are relative to the Dockerfile
-- Each command in the Dockerfile creates a new (temporary container)
+- Each command creates a new (temporary container)
 - Every creation steps is cached, so repeated builds are fast
 
 
@@ -347,7 +326,7 @@ The `MAINTAINER` instruction sets the Author:
 
 Example: 
 
-    MAINTAINER Sebastian Mancke <s.mancke@tarent.de>
+    MAINTAINER Ahmed Kamal <akamal@cloud9ers.com>
 
 Dockerfile
 =====================
@@ -368,13 +347,6 @@ Example:
     COPY *.config /etc/service/
     COPY cfg/ /etc/service/
 
-Dockerfile
-=====================
-
-Exercise
-----------
-
-Recreate your webserver image with static content using `docker build`
 
 Dockerfile
 =====================
@@ -383,7 +355,7 @@ CMD
 --------
 
 With `CMD` you can specify the default command to execute on container startup.
-It has who forms.
+It has two forms.
 
 The exec form (preferred):
 
@@ -395,8 +367,6 @@ The shell form:
 
 __Attention__: the shell form starts the command in a sub process, so it will not get
 the process id 1 and will not receive all signals e.g. from command line or `docker stop`.
-
-Example: 
 
     CMD ["nginx", "-g", "daemon off;"]
 
@@ -442,7 +412,7 @@ Example:
 Dockerfile
 ==========================
 
-Exercise
+Practice
 ----------
 Create a `greeting` image which can echo a configurable hello world greeting message in ascii art (e.g. using the ubuntu package figlet):
 
@@ -562,11 +532,11 @@ Example nginx
 Setup multiple containers
 ==========================
 
-The power of docker comes in, when you compose you apps out of multiple containers.
+The power of docker comes in, when you compose your apps out of multiple containers.
 
 - Linking Containers
 - Docker Compose
-- gig 
+
 
 Linking Containers
 ===================
@@ -588,15 +558,9 @@ Inter Container Communication
 
 docker-compose
 ================
-Einfaches docker tool zum starten mehrerer container
+A docker tool for starting multiple container compositions
 
-Installation:
-----------------
-
-    curl -L https://github.com/docker/compose/releases/download/1.3.1/docker-compose-`uname -s`-`uname -m` > docker-compose
-    chmod a+x docker-compose
-
-Configuration über `docker-compose.yml`:
+Configuration for `docker-compose.yml`:
 
     web:
       build: .
@@ -633,21 +597,33 @@ docker-compose:
       up                 Create and start containers
       migrate-to-labels  Recreate containers to add labels
 
-Linking Containers
-===================
 
-Exercise
-----------
-- Setup an nginx
-- linked to a NoSQL Database (e.g. elasticsearch)
-- restricting the access
+Advanced Topics?
+================
+
+Docker-machine
+
+Docker Swarm
+
+Multihost network overlays
+
+Hosting private registeries
+
+Service registeration and discovery
+
+Ambassador pattern
+
+Scalable cloud hosting
 
 Further reading
 ===============
-[docker.com](https://www.docker.com)
 
-[Commandline reference](https://docs.docker.com/reference/commandline/cli/)
+https://www.docker.com
 
-[Dockerfile reference](https://docs.docker.com/reference/builder/)
+man docker
 
-[Docker Registry](https://hub.docker.com/)
+https://docs.docker.com/reference/builder/
+
+https://hub.docker.com/
+
+![Open Source](http://www.techweekeurope.co.uk/wp-content/uploads/2011/02/Open-Source-Software-.jpg)
